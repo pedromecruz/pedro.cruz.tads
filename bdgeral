@@ -1,0 +1,29 @@
+LOJA DE ELETRÔNICOS PEDRO CRUZ 
+
+--Tabela cliente:
+idCliente
+nomeCliente
+idadeCliente
+enderecoCliente
+dataCadastroCliente
+cpfCliente
+emailCliente
+
+
+--Tabela produto
+idProduto
+nomeProduto
+tipoProduto
+estoqueMedio
+estoqueMinimo
+estoqueMaximo
+idFornecedor
+
+
+--Tabela Pedido
+idPedido
+dataPedido
+idCliente
+idProduto
+valorPedido
+
