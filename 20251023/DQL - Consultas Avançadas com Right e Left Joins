@@ -1,0 +1,43 @@
+--Liste todos os clientes e seus produtos comprados (mesmo que o cliente não tenha feito compras).
+
+SELECT  
+    C.NOME AS CLIENTE, 
+    V.PRODUTO
+FROM CLIENTES C 
+LEFT JOIN VENDAS V
+    ON C.ID = V.ID_CLIENTE;
+
+
+--Mostre os produtos vendidos, exibindo “Sem Cliente” para vendas sem cadastro.
+INSERT INTO VENDAS (produto, categoria, valor, data_venda, vendedor, id_cliente) VALUES ('Cabo HDMI', 'Acessórios', 80.00, DATE '2025-04-04', 'Bruna', NULL);
+
+SELECT 
+    V.PRODUTO,
+    NVL(C.NOME, 'SEM CLIENTE') AS NOME
+FROM CLIENTES C
+RIGHT JOIN VENDAS V
+    ON C.ID = V.ID_CLIENTE;
+
+
+--Liste o nome e a cidade dos clientes sem nenhuma venda registrada.
+
+INSERT INTO CLIENTES (NOME, CIDADE, ESTADO) VALUES ('SOLHANDO DA SILVA', 'POBRETAO', 'RS');
+
+SELECT 
+    C.NOME,
+    C.CIDADE
+FROM CLIENTES C
+LEFT JOIN VENDAS V
+    ON C.ID = V.ID_CLIENTE
+WHERE V.ID IS NULL;
+
+
+--Gere um relatório consolidado com todas as cidades, exibindo a soma das vendas e indicando 0 quando não houve vendas.
+
+SELECT 
+    C.CIDADE,
+    NVL(SUM(V.VALOR), 0) AS VALOR_ESTADO
+FROM CLIENTES C
+LEFT JOIN VENDAS V
+    ON C.ID = V.ID_CLIENTE
+GROUP BY C.CIDADE;
